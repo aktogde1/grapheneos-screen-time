@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Screen Time for GrapheneOS</title>
+<style>
+:root{color-scheme:dark}body{margin:0;padding:20px;background:#0f1511;font-family:"Segoe UI",Arial,sans-serif}.dashboard{--ink:#e9edeb;--muted:#9ba5a0;--line:#343c37;--panel:#171d19;--focus:#b4d77b;color:var(--ink);background:var(--panel);width:100%;box-sizing:border-box;padding:26px;border:1px solid var(--line);border-radius:12px;text-align:left;font-size:14px;font-variant-numeric:tabular-nums}.dashboard *{box-sizing:border-box}[hidden]{display:none!important}.dashboard button,.dashboard input,.dashboard select{font:inherit;color:inherit}button{cursor:pointer}button:disabled{opacity:.6;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,tr:focus-visible{outline:2px solid var(--focus);outline-offset:3px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;color:var(--muted)}.top{display:flex;justify-content:space-between;gap:16px;align-items:start}.title{font-size:25px;font-weight:650;letter-spacing:-.7px;margin:6px 0}.sub{font-size:12px;color:var(--muted);line-height:1.6}.badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;padding:7px 10px;border:1px solid var(--line);border-radius:6px}.dot{width:6px;height:6px;border-radius:50%;background:var(--focus);flex:none}.toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;padding:19px 0 14px}.tabs{display:flex;gap:3px;flex-wrap:wrap}.tab,.plain,.toggle{background:transparent;border:1px solid var(--line);padding:8px 11px;border-radius:6px;font-size:12px;min-height:36px}.tab{border-color:transparent}.tab:hover,.plain:hover,.category:hover,.bar-day:hover{background:color-mix(in srgb,var(--ink) 5%,transparent)}.tab[aria-pressed=true],.toggle[aria-pressed=true]{background:color-mix(in srgb,var(--focus) 14%,transparent);border-color:color-mix(in srgb,var(--focus) 40%,var(--line));color:var(--focus)}.refresh-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}#refresh-data{border-color:var(--focus)}.status-text{font-size:12px;color:var(--muted);line-height:1.6;overflow-wrap:anywhere}.status-text.error{color:#edb4a6}.setup{border-block:1px solid var(--line);padding:28px 0;margin-top:20px}.setup h2{font-size:20px;font-weight:650;margin:0 0 10px}.setup p,.setup li{font-size:14px;line-height:1.8;max-width:780px}.setup ol{padding-left:22px}.setup code{font-size:13px;color:var(--focus)}.kpis{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:0;border-block:1px solid var(--line);padding:18px 0;margin-top:18px}.kpi{padding:0 17px;border-left:1px solid var(--line);min-width:0}.kpi:first-child{padding-left:0;border-left:0}.value{font-size:30px;font-weight:650;letter-spacing:-1px;line-height:1.3;margin:7px 0 3px}.kpi.primary .value{color:var(--focus);font-size:36px}.kpi .label{font-size:12px;color:var(--muted)}.hint{font-size:11px;color:var(--muted);line-height:1.5}.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:25px;padding-top:24px}.section{min-width:0}.section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.section h2,.catalog h2,.drawer h2{font-size:15px;font-weight:650;letter-spacing:-.2px;margin:0}.chart{height:175px;display:grid;gap:10px;align-items:stretch;border-bottom:1px solid var(--line);margin-top:18px}.bar-day{border:0;background:transparent;display:flex;flex-direction:column;justify-content:end;align-items:center;padding:0 3px;border-radius:5px 5px 0 0;gap:8px;position:relative;min-width:0}.bar-day .day-number{font-size:11px;color:var(--muted)}.bar-day .column{width:100%;max-width:44px;background:color-mix(in srgb,var(--focus) 36%,var(--panel));border-radius:4px 4px 0 0;min-height:2px}.bar-day.selected .column,.bar-day.peak .column{background:var(--focus)}.bar-day.today .column{background:color-mix(in srgb,var(--focus) 22%,var(--panel));border:1px dashed var(--focus)}.bar-day.today.selected .column{background:var(--focus)}.day-labels{display:grid;gap:10px;padding-top:8px}.day-labels span{text-align:center;font-size:11px;color:var(--muted);min-width:0}.days-detail{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted);margin-top:13px}.note{padding-top:13px;font-size:12px;color:var(--muted);line-height:1.6}.category{display:block;width:100%;border:0;background:transparent;text-align:left;padding:8px 0;border-radius:4px;min-height:44px}.cat-top{display:flex;justify-content:space-between;gap:8px;font-size:12px;align-items:baseline}.cat-top .cat-time{font-size:11px;color:var(--muted);white-space:nowrap}.track{height:5px;border-radius:3px;background:color-mix(in srgb,var(--ink) 7%,transparent);overflow:hidden;margin-top:7px}.fill{height:100%;background:var(--focus);border-radius:3px}.category.selected .cat-name{text-decoration:underline;text-underline-offset:4px}.category-wrap{max-height:280px;overflow:auto;padding-right:5px}.rank-row{display:grid;grid-template-columns:22px 30px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;padding:10px 0}.rank-num{font-size:11px;color:var(--muted)}.monogram{width:29px;height:29px;border:1px solid var(--line);border-radius:7px;display:grid;place-items:center;font-size:11px;color:var(--focus);font-weight:650}.app-name{font-size:12px;font-weight:600;overflow-wrap:anywhere}.app-sub{font-size:11px;color:var(--muted);margin-top:4px}.rank-metric{font-size:12px;text-align:right}.rank-row .track{height:3px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.chip{background:transparent;border:1px solid var(--line);border-radius:7px;padding:9px 10px;text-align:left;display:flex;gap:9px;align-items:center}.chip:hover,.rank-row:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}.chip span{font-size:12px}.chip small{font-size:10px;color:var(--muted)}.daily-insight{margin-top:18px;padding:15px 0;border-block:1px solid var(--line);line-height:1.6;font-size:13px}.daily-insight strong{color:var(--focus);font-weight:650}.catalog{margin-top:28px}.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}.controls input{flex:1;min-width:160px;background:transparent;border:1px solid var(--line);border-radius:6px;padding:9px 11px;font-size:12px}.controls select{max-width:220px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:9px;font-size:12px}.controls label{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}.controls input[type=checkbox]{min-width:14px;width:14px;height:14px;flex:none;accent-color:var(--focus)}.table-wrap{overflow:auto;max-height:410px;border:1px solid var(--line);border-radius:7px}table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}th{position:sticky;top:0;text-align:left;background:var(--panel);z-index:1;font-size:10px;color:var(--muted);padding:11px 12px;font-weight:500;border-bottom:1px solid var(--line)}td{padding:11px 12px;border-bottom:1px solid color-mix(in srgb,var(--line) 75%,transparent)}tbody tr{cursor:pointer}tbody tr:hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}.muted-cell{font-size:11px;color:var(--muted)}.right{text-align:right}.small-button{border:0;background:transparent;color:var(--focus);padding:5px;font:inherit;cursor:pointer}.foot{font-size:12px;color:var(--muted);line-height:1.7;margin-top:17px;border-top:1px solid var(--line);padding-top:16px}.foot summary{cursor:pointer}.empty{text-align:center;color:var(--muted);padding:28px;font-size:12px}.drawer{margin-top:20px;border:1px solid var(--line);padding:18px;border-radius:8px}.mini-week{display:grid;gap:7px;align-items:end;height:110px;margin:15px 0 8px}.mini-day{display:flex;flex-direction:column;justify-content:end;height:100%;align-items:center;gap:6px;font-size:10px;color:var(--muted);min-width:0}.mini-column{width:65%;background:var(--focus);border-radius:3px;min-height:2px}.drawer-meta{display:flex;flex-wrap:wrap;gap:18px;font-size:11px;color:var(--muted);line-height:1.6}.endline{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}.mono{font-family:monospace;font-size:11px;overflow-wrap:anywhere}.privacy{font-size:11px;color:var(--muted)}.table-wrap,.category-wrap{scrollbar-width:thin;scrollbar-color:var(--focus) var(--panel)}
+@media(min-width:1400px){.dashboard{padding:32px}.grid{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px}.category-wrap{max-height:330px}.chart{height:210px}}
+@media(max-width:760px){body{padding:8px}.dashboard{padding:18px}.grid{grid-template-columns:1fr;gap:25px}.kpis{grid-template-columns:1.4fr 1fr}.kpi{padding:12px 0;border-left:0}.kpi:nth-child(even){padding-left:15px;border-left:1px solid var(--line)}.value{font-size:25px}.kpi.primary .value{font-size:31px}.top{flex-wrap:wrap}.chart{height:155px;gap:3px}.day-labels{gap:3px}.day-number{font-size:10px!important}.category-wrap{max-height:none}.title{font-size:22px}.dashboard button,.controls label,.controls input:not([type=checkbox]),.controls select{min-height:44px}.controls select{max-width:100%}.controls input[type=search]{width:100%}.small-button{font-size:12px}.days-detail{font-size:11px}.mini-week{gap:3px}.badge{max-width:100%}}
+@media(prefers-reduced-motion:no-preference){.fill,.column{transition:height .18s ease,width .18s ease}}
+@media print{body{padding:0;background:white}.dashboard{color:#161616;background:white;--ink:#161616;--muted:#555;--panel:white;--line:#ddd;--focus:#426b28;border:0}.table-wrap,.category-wrap{max-height:none;overflow:visible}.controls,.toolbar,.plain,.toggle,#refresh-status{display:none}.grid{break-inside:avoid}.foot{font-size:12pt}}
+</style>
+</head>
+<body>
+<main class="dashboard" id="dashboard">
+<header class="top"><div><div class="eyebrow" id="device-label">GrapheneOS · локальная аналитика</div><h1 class="title">Экранное время GrapheneOS</h1><div class="sub" id="report-subtitle">Статистика появится после первого сбора с телефона.</div></div><div class="badge"><span class="dot"></span><span id="snapshot-time">Снимок ещё не собран</span></div></header>
+<div class="toolbar"><div class="tabs" id="day-tabs" role="group" aria-label="Период"></div><div class="refresh-controls"><button id="screen-mode" class="toggle" aria-pressed="true" hidden>Разблокированный экран</button><button id="refresh-data" class="plain">Обновить данные</button></div></div>
+<div class="status-text" id="refresh-status" role="status" aria-live="polite">Проверяю наличие локального отчёта…</div>
+<section id="setup" class="setup" aria-labelledby="setup-title"><div class="eyebrow">Первый запуск</div><h2 id="setup-title">Пока нет данных с телефона</h2><p>Здесь нет примерной статистики: показатели и приложения появятся только после чтения вашего устройства.</p><ol><li>Установите Android Platform Tools на компьютере: команда <code>adb</code> должна быть доступна.</li><li>На телефоне включите параметры разработчика и <b>отладку по USB</b>. Подключите телефон USB-кабелем с передачей данных.</li><li>Разблокируйте телефон и подтвердите запрос «Разрешить отладку по USB» для этого компьютера.</li><li>Запустите локальный сервер проекта и откройте выданный им адрес. Нажмите <b>«Обновить данные»</b>.</li></ol><p class="note">Чтение через ADB не удаляет приложения и не меняет настройки. После сбора можно отключить отладку по USB. Короткая история на новом устройстве будет показана как есть, без заполнения выдуманными днями.</p></section>
+<div id="analytics" hidden>
+<section class="kpis" aria-label="Основные показатели"><div class="kpi primary"><div class="label" id="main-label">В среднем в день</div><div class="value" id="screen-average"></div><div class="hint" id="screen-total"></div></div><div class="kpi"><div class="label" id="unlock-label">Разблокировок в день</div><div class="value" id="unlock-average"></div><div class="hint" id="unlock-total"></div></div><div class="kpi"><div class="label">Ежедневных приложений</div><div class="value" id="everyday-count"></div><div class="hint" id="everyday-note"></div></div><div class="kpi"><div class="label">Топ-3 по времени</div><div class="value" id="top-share"></div><div class="hint" id="share-note"></div></div></section>
+<div class="grid"><section class="section"><div class="section-title"><h2>Экранное время по дням</h2><span class="hint" id="chart-legend"></span></div><div class="chart" id="screen-chart"></div><div class="day-labels" id="screen-labels"></div><div class="days-detail" id="days-detail"></div><div class="note">Нажми на столбец: категории, топ и таблица переключатся на этот день. Сегодня — неполный день, отдельно от среднего.</div></section><section class="section"><div class="section-title"><h2 id="categories-title">Категории приложений</h2><button class="small-button" id="reset-category" hidden>Сбросить фильтр</button></div><div class="category-wrap" id="categories"></div><div class="note">Доли от времени в приложениях, не от времени экрана. Нажми категорию для фильтра.</div></section></div>
+<div class="grid"><section class="section"><div class="section-title"><h2 id="top-title">Топ приложений · среднее в день</h2><span class="hint">экран, не фон</span></div><div id="top-apps"></div></section><section class="section"><div class="section-title"><h2>То, что ты открываешь каждый день</h2><span class="hint" id="daily-coverage"></span></div><div class="sub">Приложения с активностью во все полные дни доступной истории.</div><div class="chips" id="everyday-apps"></div><div class="daily-insight" id="daily-insight"></div><div class="note">Статистика не различает полезную работу и прокрутку ленты — здесь нет оценки «хорошо / плохо».</div></section></div>
+<section class="drawer" id="app-detail" hidden aria-live="polite"><div class="section-title"><h2 id="detail-title"></h2><button class="plain" id="close-detail">Закрыть</button></div><div class="drawer-meta" id="detail-meta"></div><div class="mini-week" id="detail-week"></div><div class="mono" id="detail-package"></div></section>
+<section class="catalog"><div class="section-title"><h2>Все приложения</h2><span class="hint" id="app-count"></span></div><div class="controls"><input type="search" id="search" placeholder="Найти приложение…" aria-label="Поиск приложения"><select id="category-filter" aria-label="Категория"><option value="">Все категории</option></select><select id="sort" aria-label="Сортировка"><option value="time">По времени</option><option value="days">По частоте</option><option value="name">По названию</option></select><label><input type="checkbox" id="only-daily">Только ежедневные</label><label><input type="checkbox" id="hide-zero">Скрыть нулевые</label></div><div class="table-wrap" tabindex="0" role="region" aria-label="Таблица приложений, прокручивается"><table><thead><tr><th>Приложение / категория</th><th class="right" id="col-time">За период</th><th class="right" id="col-avg">Среднее / день</th><th class="right" id="col-days">Дней</th><th class="right">Последнее открытие</th></tr></thead><tbody id="app-table"></tbody></table></div><div class="endline"><span class="status-text" id="filter-status"></span><button class="plain" id="export-csv" disabled>Скачать таблицу CSV</button></div></section>
+<details class="foot"><summary>Как читать эти цифры и что здесь не учтено</summary><p id="period-note"></p><p><b>Разблокированный экран</b> — оценка времени, когда экран включён и блокировка скрыта. <b>Включённый экран</b> включает экран блокировки. Always-On Display и фоновая работа не входят в эти показатели. Разблокировки посчитаны по событиям скрытия экрана блокировки.</p><p>Время приложений приблизительно восстановлено по событиям активности. Музыка с выключенным экраном, VPN и фоновые сервисы не считаются экранной активностью приложения.</p><p>Категории — группировка, а не оценка Android; неизвестные приложения отображаются с именем пакета в категории «Прочее» (Other). Время приложений нельзя складывать для получения общего экранного времени: есть системные экраны и возможные перекрытия.</p><p id="coverage-note"></p><p>Последнее открытие — из более длинной истории. Ноль за период не означает «никогда не использовал». Само подключение кабеля обновление не запускает.</p><span class="privacy">Локальный отчёт · без внешних библиотек, аналитики и отправки данных</span></details>
+</div>
+<noscript><p>Для загрузки данных, графиков и фильтров требуется JavaScript.</p></noscript>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+function status(message, error=false) { $('refresh-status').textContent=message; $('refresh-status').classList.toggle('error',error); }
+let report=null, apps=[], fullDays=[], days=[], dailyApps=[], categories=[], labels=[];
+const state={day:null,mode:'unlocked_ms',category:'',search:'',sort:'time',daily:false,hideZero:false};
+const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const number=value=>Number.isFinite(Number(value))?Math.max(0,Number(value)):0;
+const sum=values=>values.reduce((total,value)=>total+number(value),0);
+function duration(ms,short=false) {
+  if(ms===null) return '—';
+  if(!ms) return '0 мин';
+  const seconds=Math.round(number(ms)/1000);
+  if(seconds<60) return seconds?seconds+' с':'<1 с';
+  const minutes=Math.floor(seconds/60);
+  if(minutes<60) return short?minutes+' мин':minutes+' мин '+String(seconds%60).padStart(2,'0')+' с';
+  return Math.floor(minutes/60)+' ч '+String(minutes%60).padStart(2,'0')+' мин';
+}
+function roundedHours(ms) {
+  if(ms===null) return '—';
+  const minutes=Math.round(number(ms)/60000);
+  return Math.floor(minutes/60)+' ч '+String(minutes%60).padStart(2,'0')+' мин';
+}
+function dateLabel(value) {
+  const date=String(value||'');
+  return /^\d{4}-\d{2}-\d{2}/.test(date)?date.slice(8,10)+'.'+date.slice(5,7)+'.'+date.slice(0,4):'Нет записи';
+}
+function amount(app) { return state.day===null?app.week_ms_estimate:number(app.daily_ms[state.day]); }
+function periodDays() { return Number.isInteger(report?.period_days)&&report.period_days>=0?report.period_days:fullDays.length; }
+function mean(app) { return state.day===null?(periodDays()?amount(app)/periodDays():null):amount(app); }
+function periodName() { return state.day===null?'период':labels[state.day]; }
+function filteredApps() {
+  const rows=apps.filter(app=>(!state.category||app.category===state.category)&&(!state.search||(app.name+' '+app.package).toLocaleLowerCase('ru').includes(state.search))&&(!state.daily||dailyApps.includes(app))&&(!state.hideZero||amount(app)>0));
+  if(state.sort==='name') rows.sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+  else if(state.sort==='days') rows.sort((a,b)=>b.days-a.days||amount(b)-amount(a));
+  else rows.sort((a,b)=>amount(b)-amount(a)||b.days-a.days||a.name.localeCompare(b.name,'ru'));
+  return rows;
+}
+function setCategory(category) {state.category=category; $('category-filter').value=category;render();}
+let detailTrigger=null;
+function openApp(packageName,trigger) {
+  const app=apps.find(item=>item.package===packageName);
+  if(!app) return;
+  detailTrigger=trigger; $('app-detail').hidden=false; $('detail-title').textContent=app.name;
+  $('detail-meta').innerHTML='<span>'+esc(app.category)+'</span><span>За период: <b>'+duration(app.week_ms_estimate)+'</b></span><span>Среднее: <b>'+duration(periodDays()?app.week_ms_estimate/periodDays():null)+'</b></span><span>'+app.days+' дней из '+periodDays()+'</span><span>Последнее открытие: '+dateLabel(app.last_used)+'</span>';
+  const values=days.map((day,index)=>number(app.daily_ms[index])), maximum=Math.max(...values,1);
+  $('detail-week').style.gridTemplateColumns='repeat('+Math.max(days.length,1)+',minmax(0,1fr))';
+  $('detail-week').innerHTML=values.map((ms,index)=>'<div class="mini-day"><span>'+duration(ms,true)+'</span><div class="mini-column" style="height:'+Math.max(2,ms/maximum*65)+'px"></div><span>'+labels[index]+'</span></div>').join('');
+  $('detail-package').textContent=app.package; $('close-detail').focus({preventScroll:true});
+}
+function applyReport(next) {
+  if(!next||next.has_data===false) return false;
+  if(!Array.isArray(next.screen_days)||!Array.isArray(next.app_rows)||!next.collected_at) throw new Error('Некорректный формат отчёта.');
+  const screenDays=[...next.screen_days,...(next.today_screen?[next.today_screen]:[])];
+  if(screenDays.some(day=>!/^\d{4}-\d{2}-\d{2}$/.test(day.date)||['screen_on_ms','unlocked_ms','unlocks'].some(key=>!Number.isFinite(day[key])||day[key]<0))) throw new Error('В отчёте отсутствуют показатели экрана.');
+  report=next; fullDays=next.screen_days; days=screenDays;
+  apps=next.app_rows.map(app=>({ ...app,package:String(app.package||''),name:String(app.name||app.package||'Неизвестное приложение'),category:String(app.category||'Other'),daily_ms:Array.isArray(app.daily_ms)?app.daily_ms.map(number):[],week_ms_estimate:number(app.week_ms_estimate),days:Array.isArray(app.used_dates)?fullDays.filter(day=>app.used_dates.includes(day.date)).length:Math.min(fullDays.length,number(app.days)) }));
+  dailyApps=periodDays()?apps.filter(app=>app.days===periodDays()&&!['com.android.settings','com.android.launcher3','app.lawnchair','bitpit.launcher'].includes(app.package)):[];
+  categories=[...new Set(apps.map(app=>app.category))].sort((a,b)=>a.localeCompare(b,'ru'));
+  labels=days.map((day,index)=>index===fullDays.length?'Сегодня':day.date.slice(8,10)+'.'+day.date.slice(5,7));
+  if(state.day!==null&&state.day>=days.length) state.day=null;
+  if(state.category&&!categories.includes(state.category)) state.category='';
+  $('category-filter').innerHTML='<option value="">Все категории</option>'+categories.map(category=>'<option value="'+esc(category)+'">'+esc(category)+'</option>').join('');
+  $('category-filter').value=state.category;
+  $('device-label').textContent=(next.phone_model||'Телефон')+' · локальная аналитика';
+  $('report-subtitle').textContent=(fullDays.length?dateLabel(fullDays[0].date)+' — '+dateLabel(fullDays.at(-1).date)+' · '+periodDays()+' полных дней':'Нет полных дней истории')+(next.today_screen?' + сегодня':'')+' · время телефона';
+  $('snapshot-time').textContent='Обновлено '+dateLabel(next.collected_at)+' в '+String(next.collected_at).slice(11,16)+(String(next.collected_at).match(/(?:Z|[+-]\d{2}:\d{2})$/)?.[0]?' ('+String(next.collected_at).match(/(?:Z|[+-]\d{2}:\d{2})$/)[0]+')':'');
+  $('period-note').textContent='Профиль Android: '+(next.user??'не указан')+'. Отчёт: '+next.period_start+' — '+next.period_end_exclusive+' (конец не включён). Снимок: '+next.collected_at+'.';
+  $('coverage-note').textContent='В таблице '+apps.length+' приложений'+(next.technical_package_count!=null?'; скрыто '+next.technical_package_count+' технических пакетов':'')+'. Средние рассчитаны по '+periodDays()+' полным дням доступной истории. Сегодня не входит в среднее и частоту за период.';
+  $('app-detail').hidden=true; detailTrigger=null;
+  $('setup').hidden=true; $('analytics').hidden=false; $('screen-mode').hidden=false; $('export-csv').disabled=false;
+  render(); return true;
+}
+function render() {
+  if(!report) return;
+  const count=periodDays(), todayIndex=fullDays.length, selected=state.day===null?fullDays:[days[state.day]], screenSum=sum(selected.map(day=>day[state.mode])), unlocks=sum(selected.map(day=>day.unlocks));
+  const divisor=state.day===null?count:1, rankedPeriod=apps.filter(app=>amount(app)>0).sort((a,b)=>amount(b)-amount(a)), topThree=rankedPeriod.slice(0,3), appTotal=sum(apps.map(amount)), topTime=sum(topThree.map(amount)), percent=appTotal?(topTime/appTotal*100).toFixed(1).replace('.',',')+'%':'—';
+  $('day-tabs').innerHTML=[['Период · '+count+' дн.',null],...labels.map((label,index)=>[label,index])].map(([label,index])=>'<button class="tab" data-day="'+(index===null?'all':index)+'" aria-pressed="'+(index===state.day)+'">'+esc(label)+'</button>').join('');
+  $('main-label').textContent=state.day===null?'В среднем в день':'Экранное время · '+labels[state.day];
+  $('screen-average').textContent=roundedHours(divisor?screenSum/divisor:null);
+  $('screen-total').textContent=state.day===null?(count?roundedHours(screenSum)+' за '+count+' полных дней':'Среднее появится после полного дня'):(state.day===todayIndex?'Неполный день · не входит в среднее':state.mode==='unlocked_ms'?'Без экрана блокировки':'Включая экран блокировки');
+  $('unlock-label').textContent=state.day===null?'Разблокировок в день':'Разблокировок';
+  $('unlock-average').textContent=divisor?String(Math.round(unlocks/divisor)):'—';
+  $('unlock-total').textContent=state.day===null?(count?unlocks+' за период':'Нет полных дней'):'за выбранный день';
+  $('everyday-count').textContent=count?dailyApps.length:'—';
+  $('everyday-note').textContent=count+' из '+count+' полных дней, без лаунчера и настроек';
+  $('daily-coverage').textContent=count+' / '+count;
+  $('top-share').textContent=percent;
+  $('share-note').textContent='Доля времени в приложениях · '+periodName();
+  $('screen-mode').textContent=state.mode==='unlocked_ms'?'Разблокированный экран':'Включённый экран';
+  $('screen-mode').setAttribute('aria-pressed',String(state.mode==='unlocked_ms'));
+  $('chart-legend').textContent=state.mode==='unlocked_ms'?'без блокировки':'включая блокировку';
+  const values=days.map(day=>day[state.mode]), max=Math.max(...values,1), peak=values.indexOf(Math.max(...values));
+  $('screen-chart').style.gridTemplateColumns='repeat('+Math.max(days.length,1)+',minmax(0,1fr))';
+  $('screen-labels').style.gridTemplateColumns=$('screen-chart').style.gridTemplateColumns;
+  $('screen-chart').innerHTML=values.map((ms,index)=>'<button class="bar-day '+(state.day===index?'selected ':'')+(index===todayIndex?'today ':index===peak?'peak ':'')+'" data-day="'+index+'" aria-pressed="'+(state.day===index)+'" aria-label="'+labels[index]+', '+roundedHours(ms)+(index===todayIndex?', неполный день':'')+'"><span class="day-number">'+roundedHours(ms)+'</span><span class="column" style="height:'+Math.max(1,ms/max*75)+'%"></span></button>').join('')||'<div class="empty">Нет записей экрана.</div>';
+  $('screen-labels').innerHTML=labels.map(label=>'<span>'+esc(label)+'</span>').join('');
+  const fullValues=fullDays.map(day=>day[state.mode]);
+  $('days-detail').textContent=count?'Полные дни: максимум '+roundedHours(Math.max(...fullValues))+' · минимум '+roundedHours(Math.min(...fullValues)):'Для сравнения полных дней пока недостаточно истории.';
+  $('categories-title').textContent='Категории · '+(state.day===null?count+' полных дней':labels[state.day]);
+  const catData=categories.map(category=>({name:category,time:sum(apps.filter(app=>app.category===category).map(amount))})).sort((a,b)=>b.time-a.time);
+  $('categories').innerHTML=catData.map(category=>'<button class="category '+(state.category===category.name?'selected':'')+'" data-category="'+esc(category.name)+'" aria-pressed="'+(state.category===category.name)+'"><div class="cat-top"><span class="cat-name">'+esc(category.name)+'</span><span class="cat-time">'+duration(category.time,true)+' · '+(appTotal?Math.round(category.time/appTotal*100)+'%':'—')+'</span></div><div class="track"><div class="fill" style="width:'+(appTotal?category.time/appTotal*100:0)+'%"></div></div></button>').join('')||'<div class="empty">В отчёте нет приложений.</div>';
+  $('reset-category').hidden=!state.category;
+  const ranked=rankedPeriod.filter(app=>!state.category||app.category===state.category).slice(0,10), maxRank=ranked.length?amount(ranked[0]):1;
+  $('top-title').textContent=state.day===null?'Топ приложений · среднее в день':'Топ приложений · '+labels[state.day];
+  $('top-apps').innerHTML=ranked.map((app,index)=>'<button class="rank-row" data-app="'+esc(app.package)+'"><span class="rank-num">'+String(index+1).padStart(2,'0')+'</span><span class="monogram">'+esc(app.name.replace(/[^\p{L}\p{N}]/gu,'').slice(0,2).toUpperCase())+'</span><div><div class="app-name">'+esc(app.name)+'</div><div class="app-sub">'+esc(app.category)+' · '+app.days+'/'+count+' дней</div><div class="track"><div class="fill" style="width:'+amount(app)/maxRank*100+'%"></div></div></div><span class="rank-metric">'+duration(mean(app),true)+'</span></button>').join('')||'<div class="empty">Нет экранной активности в выбранном периоде.</div>';
+  $('everyday-apps').innerHTML=dailyApps.map(app=>'<button class="chip" data-app="'+esc(app.package)+'"><span>'+esc(app.name)+'</span><small>'+duration(app.week_ms_estimate/count,true)+'/день</small></button>').join('')||'<div class="note">'+(count?'Нет приложений с активностью во все полные дни.':'Ежедневные привычки появятся после полного дня истории.')+'</div>';
+  $('daily-insight').innerHTML=topThree.length?'<strong>'+duration(divisor?topTime/divisor:null,true)+(state.day===null?' в день':'')+'</strong> — на '+topThree.map(app=>esc(app.name)).join(', ')+' вместе.<br>Они занимают <strong>'+percent+'</strong> учтённого времени в приложениях за выбранный период.':'Нет активности приложений за выбранный период.';
+  renderTable();
+}
+function renderTable() {
+  const rows=filteredApps(), count=periodDays();
+  $('app-count').textContent=apps.length+' приложений · таблица прокручивается';
+  $('col-time').textContent=state.day===null?'За '+count+' полных дней':'За '+labels[state.day];
+  $('col-avg').textContent='Среднее / '+count+' полных дней';
+  $('col-days').textContent='Дней / '+count;
+  $('app-table').innerHTML=rows.map(app=>'<tr data-app="'+esc(app.package)+'" tabindex="0" aria-label="Подробности: '+esc(app.name)+'"><td><span class="app-name">'+esc(app.name)+'</span><div class="muted-cell">'+esc(app.category)+'</div></td><td class="right">'+duration(amount(app))+'</td><td class="right">'+duration(count?app.week_ms_estimate/count:null)+'</td><td class="right">'+app.days+' / '+count+'</td><td class="right muted-cell">'+dateLabel(app.last_used)+'</td></tr>').join('')||'<tr><td colspan="5" class="empty">Ничего не найдено. Измени поиск или фильтры.</td></tr>';
+  $('filter-status').textContent='Показано '+rows.length+' из '+apps.length+' · нажми приложение для подробностей';
+}
+$('dashboard').addEventListener('click',event=>{
+  const day=event.target.closest('[data-day]');
+  if(day) {state.day=day.dataset.day==='all'?null:Number(day.dataset.day);render();return;}
+  const category=event.target.closest('[data-category]');
+  if(category) {setCategory(state.category===category.dataset.category?'':category.dataset.category);return;}
+  const app=event.target.closest('[data-app]');
+  if(app) openApp(app.dataset.app,app);
+});
+$('dashboard').addEventListener('keydown',event=>{
+  const row=event.target.closest('tr[data-app]');
+  if(row&&(event.key==='Enter'||event.key===' ')) {event.preventDefault();openApp(row.dataset.app,row);}
+  if(event.key==='Escape'&&!$('app-detail').hidden) $('close-detail').click();
+});
+$('close-detail').onclick=()=>{$('app-detail').hidden=true;if(detailTrigger?.isConnected) detailTrigger.focus({preventScroll:true});};
+$('search').oninput=event=>{state.search=event.target.value.toLocaleLowerCase('ru').trim();renderTable();};
+$('category-filter').onchange=event=>setCategory(event.target.value);
+$('reset-category').onclick=()=>setCategory('');
+$('sort').onchange=event=>{state.sort=event.target.value;renderTable();};
+$('only-daily').onchange=event=>{state.daily=event.target.checked;renderTable();};
+$('hide-zero').onchange=event=>{state.hideZero=event.target.checked;renderTable();};
+$('export-csv').onclick=()=>{
+  if(!report) return;
+  const count=periodDays(), header=['Приложение','Пакет','Категория','Период: '+(state.day===null?count+' полных дней':labels[state.day]),'За выбранный период, мин','Среднее за '+count+' полных дней, мин','Дней использования из '+count,'Последнее открытие'];
+  const rows=filteredApps().map(app=>[app.name,app.package,app.category,state.day===null?report.period_start+' — '+report.period_end_exclusive:days[state.day].date,(amount(app)/60000).toFixed(3),count?(app.week_ms_estimate/count/60000).toFixed(3):'',app.days,app.last_used||'']);
+  const csvCell=value=>{const text=String(value);return '"'+(/^[\s]*[=+\-@]|^[\t\r\n]/.test(text)?"'"+text:text).replace(/"/g,'""')+'"';};
+  const text='\ufeff'+[header,...rows].map(row=>row.map(csvCell).join(';')).join('\r\n');
+  const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})), link=document.createElement('a');
+  link.href=url;link.download='phone-usage-'+String(report.period_start).slice(0,10)+(state.day===null?'':'-'+days[state.day].date)+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+};
+$('screen-mode').onclick=()=>{state.mode=state.mode==='unlocked_ms'?'screen_on_ms':'unlocked_ms';render();};
+async function loadReport() {
+  if (!['http:','https:'].includes(location.protocol)) {
+    status('Открой адрес локального сервера проекта, а не HTML-файл напрямую.',true); return;
+  }
+  $('refresh-data').disabled=true;
+  try {
+    const response=await fetch('/api/data',{cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(10000)});
+    if(!response.ok) throw new Error('Локальный сервер не вернул отчёт.');
+    const hasData=applyReport(await response.json());
+    status(hasData?'Загружен локальный снимок. Подключи телефон и нажми «Обновить данные» для нового сбора.':'Подключи телефон по USB и нажми «Обновить данные».');
+  } catch(error) { status('Не удалось загрузить отчёт. Проверь, что локальный сервер запущен. '+error.message,true); }
+  finally { $('refresh-data').disabled=false; }
+}
+async function refreshPhone() {
+  const button=$('refresh-data');
+  if(button.disabled) return;
+  if(!['http:','https:'].includes(location.protocol)) {status('Для обновления открой адрес локального сервера проекта.',true);return;}
+  button.disabled=true; button.textContent='Читаю телефон…'; $('dashboard').setAttribute('aria-busy','true');
+  status('Подключение по ADB. Ничего на телефоне не изменяется. Это может занять несколько минут.');
+  try {
+    const configResponse=await fetch('/api/config',{cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(10000)});
+    if(!configResponse.ok) throw new Error('Не удалось получить настройки локального сервера.');
+    const config=await configResponse.json();
+    if(typeof config.csrf_token!=='string'||!config.csrf_token) throw new Error('Сервер не вернул токен обновления.');
+    const response=await fetch('/api/refresh',{method:'POST',headers:{'X-Dashboard-Token':config.csrf_token},credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(180000)});
+    const result=await response.json();
+    if(!response.ok||!result.ok) throw new Error(result.error||'Не удалось обновить данные.');
+    if(!applyReport(result.data)) throw new Error('Сервер не вернул новый отчёт.');
+    status('Данные обновлены.'+(report.today_screen?' Сегодня доступно отдельной вкладкой.':''));
+  } catch(error) {
+    const message=error.name==='TimeoutError'?'Время ожидания истекло. Проверь подключение телефона.':error.message==='Failed to fetch'?'Не удалось связаться с локальным сервером.':error.message;
+    status(message+' '+(report?'Предыдущая статистика остаётся доступной.':'Данные ещё не собраны; проверь USB-подключение и разрешение отладки.'),true);
+  } finally {button.disabled=false;button.textContent='Обновить данные';$('dashboard').removeAttribute('aria-busy');}
+}
+$('refresh-data').onclick=refreshPhone;
+loadReport();
+</script>
+</body>
+</html>
