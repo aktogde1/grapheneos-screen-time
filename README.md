@@ -1,8 +1,34 @@
 # GrapheneOS Screen Time
 
-Локальная панель экранного времени Android / GrapheneOS: дни, активность приложений, категории и экспорт таблицы CSV. Работает на компьютере, читает доступную историю телефона через ADB и открывается в браузере.
+**Посмотрите, куда уходит время в телефоне с GrapheneOS — по приложениям, дням и категориям.** Подключите телефон к компьютеру по USB, откройте панель в браузере и нажмите «Обновить данные». Статистика останется на вашем компьютере, без отправки в облако.
 
-**Не нужны root, разблокировка загрузчика, Android Studio или установка приложения на телефон.** Python использует только стандартную библиотеку: `pip install` не требуется. Это независимый проект, не официальный продукт GrapheneOS.
+Это **программа для компьютера, а не приложение для телефона**. Она читает уже доступную в Android историю использования и превращает её в понятный отчёт. Проект рассчитан на Android / GrapheneOS; это независимый проект, не официальный продукт GrapheneOS.
+
+## Зачем это нужно
+
+Чтобы вместо «кажется, я слишком много сижу в телефоне» увидеть, на что именно уходит время: какие приложения занимают больше всего, как меняется использование по дням и сколько приходится на разные категории. Панель помогает разобраться в своих привычках, но не блокирует приложения и не устанавливает лимиты.
+
+## Что вы увидите
+
+- **Экранное время по дням** и среднее за доступные полные дни.
+- **Время в приложениях** — какие из них занимают больше всего времени.
+- **Категории приложений** — как распределяется их использование.
+- **Сегодня отдельно** — неполный день не искажает среднее за полные дни.
+- **Экспорт CSV** — таблицу можно сохранить и открыть в табличном редакторе.
+
+## Как это работает — коротко
+
+1. На компьютере должны быть **Python 3.10+** и **ADB** — официальный инструмент Android для связи компьютера с телефоном.
+2. Вы включаете **отладку по USB**, подключаете разблокированный телефон кабелем и разрешаете подключение своему компьютеру.
+3. Запускаете панель на компьютере. Она открывается в браузере по локальному адресу, а не на внешнем сайте.
+4. Нажимаете **«Обновить данные»**. Панель читает историю телефона и сохраняет локальный отчёт.
+5. Телефон можно отключить: сохранённый отчёт доступен, пока панель запущена. Для свежих данных нужно снова подключить телефон и нажать обновление.
+
+**Не нужны root, разблокировка загрузчика, Android Studio или установка приложения на телефон.** Python использует только стандартную библиотеку: `pip install` не требуется. ADB и Python устанавливаются отдельно; команда установки ниже скачивает только саму панель.
+
+**Важно перед запуском:** это не непрерывный трекер. Обновление ручное; отчёт показывает до семи доступных полных дней и сегодня отдельно. Если Android уже не хранит историю, панель не восстановит её задним числом. Время приложений — приблизительная оценка. USB-отладку разрешайте только доверенному компьютеру и выключайте после сбора.
+
+**Дальше:** [первый запуск](#первый-запуск--по-порядку) · [если телефон не виден](#если-телефон-не-виден) · [приватность](#данные-и-приватность) · [как читать показатели](#как-читать-показатели) · [English](#english-quick-start).
 
 ## Первый запуск — по порядку
 
@@ -165,6 +191,10 @@ python docs/test_installer.py
 - [GrapheneOS: защита USB-C](https://grapheneos.org/usage#usb-c-port)
 
 ## English quick start
+
+**See where your phone time goes on GrapheneOS: by app, day and category.** This is a dashboard that runs on your computer, not an app installed on your phone. Connect your phone over USB, launch the dashboard and click **Обновить данные** (Refresh data). It reads Android's available usage history through ADB and keeps the report on your computer. No cloud upload, root or phone app is required. This is an independent project, not an official GrapheneOS product.
+
+The report includes daily screen-time estimates, app usage, categories and CSV export. It helps you understand your habits; it does not block apps or set limits. Refresh is manual, not continuous tracking. It shows up to seven available complete days plus today separately; missing history cannot be recovered and app-time estimates are approximate. You can unplug the phone after collection and view the saved report while the dashboard is running.
 
 Install Python 3.10+ and official Android Platform-Tools yourself. Enable Developer options with seven Build number taps, enable USB debugging, connect a data-capable USB cable, unlock the phone and approve your trusted computer's RSA prompt. Confirm `adb devices` reports `device`. On GrapheneOS, USB-C protection may block new connections while locked; unlock and reconnect instead of disabling all protections.
 
